@@ -37,10 +37,22 @@
     <servlet>
         <servlet-name>FileRemoveServlet</servlet-name>
         <servlet-class>ru.drondrin.servlet.FileRemoveServlet</servlet-class>
+        <multipart-config/>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>FileRemoveServlet</servlet-name>
         <url-pattern>/api/v1/file/remove/</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>DownloadServlet</servlet-name>
+        <servlet-class>ru.drondrin.servlet.DownloadServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DownloadServlet</servlet-name>
+        <url-pattern>/download/</url-pattern>
     </servlet-mapping>
 </web-app>

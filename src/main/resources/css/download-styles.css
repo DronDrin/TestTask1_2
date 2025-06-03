@@ -1,0 +1,79 @@
+.main {
+    width: 100%;
+    height: 100vw;
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.download-form {
+    background-color: var(--c1);
+    margin: 100px;
+    border-radius: 40px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    gap: 50px;
+    height: max-content;
+    width: max-content;
+}
+
+.download-form__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+}
+
+.download-form__remove-suggestion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.download-form__success-text {
+    display: none;
+}
+
+.download-form_success .download-form__success-text {
+    display: block;
+}
+
+.download-form_success .download-form__text {
+    display: none;
+}
+
+.download-form_success .download-form__download-button {
+    filter: grayscale(100%);
+    pointer-events: none;
+    transform: scale(0.9);
+}
+
+.home-widget {
+    display: block;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    user-select: none;
+    cursor: pointer;
+}
+
+.home-widget__text {
+    font-size: 30px;
+    transition: 0.2s;
+}
+
+.home-widget:hover .home-widget__text {
+    transform: translateX(-20%);
+}
