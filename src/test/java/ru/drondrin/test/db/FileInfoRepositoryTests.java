@@ -1,6 +1,6 @@
-import lombok.SneakyThrows;
+package ru.drondrin.test.db;
+
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.drondrin.DB;
