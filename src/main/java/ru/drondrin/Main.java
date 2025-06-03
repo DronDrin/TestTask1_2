@@ -3,12 +3,14 @@ package ru.drondrin;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.startup.Tomcat;
 import ru.drondrin.repository.FileInfoRepository;
+import ru.drondrin.service.FileService;
 
 import java.io.File;
 
 public class Main {
     public static ConfigReader CONFIG = new ConfigReader("src/main/resources/config.properties");
     public static FileInfoRepository fileInfoRepository;
+    public static FileService fileService;
 
     public static void main(String[] args) {
         var tomcat = new Tomcat();
@@ -18,6 +20,7 @@ public class Main {
 
         var connection = DB.createNewConnection();
         fileInfoRepository = new FileInfoRepository(connection);
+        fileService = new FileService(new File(CONFIG.stringProperty("file.bucket")), fileInfoRepository);
 
         try {
             tomcat.init();

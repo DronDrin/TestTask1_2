@@ -18,4 +18,18 @@
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>FileServlet</servlet-name>
+        <servlet-class>ru.drondrin.servlet.FileServlet</servlet-class>
+        <multipart-config>
+            <max-file-size>52428800</max-file-size>
+        </multipart-config>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>FileServlet</servlet-name>
+        <url-pattern>/api/v1/file/</url-pattern>
+    </servlet-mapping>
 </web-app>
