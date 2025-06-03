@@ -5,17 +5,47 @@ import ru.drondrin.dto.FileReadDto;
 import ru.drondrin.entity.FileInfo;
 import ru.drondrin.repository.FileInfoRepository;
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
+import java.util.List;
 import java.util.Optional;
 
-public class FileService {
+import static java.time.temporal.ChronoUnit.SECONDS;
+import static ru.drondrin.Main.CONFIG;
+
+public class FileService implements Closeable {
     private final File bucket;
     private final FileInfoRepository fileInfoRepository;
+    private Thread removeOldTask;
 
     public FileService(File bucket, FileInfoRepository fileInfoRepository) {
         this.bucket = bucket;
         this.fileInfoRepository = fileInfoRepository;
+        startRemoveOldTask();
+    }
+
+    private void startRemoveOldTask() {
+        removeOldTask = new Thread(() -> {
+            while (!Thread.currentThread().isInterrupted()) {
+                try {
+                    removeOldFiles();
+                    Thread.sleep(Duration.of(CONFIG.intProperty("file.auto-remove.check-interval"), SECONDS));
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        });
+        removeOldTask.start();
+    }
+
+    private void removeOldFiles() {
+        long removeThreshold = CONFIG.intProperty("file.auto-remove.lifetime") * 1000L;
+        for (String s : fileInfoRepository.getOldFiles(removeThreshold)) {
+            System.out.println("Removing old file: " + s);
+            deleteFile(s);
+        }
     }
 
     /**
@@ -47,5 +77,16 @@ public class FileService {
             new File(getFilePath(id)).delete();
             fileInfoRepository.deleteById(id);
         });
+    }
+
+    @Override
+    public void close() {
+        if (removeOldTask != null)
+            removeOldTask.interrupt();
+    }
+
+    public Optional<FileReadDto> getFileAndUpdateLastDownload(String id) {
+        fileInfoRepository.updateLastDownload(id);
+        return getFile(id);
     }
 }

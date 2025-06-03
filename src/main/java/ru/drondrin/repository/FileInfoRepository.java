@@ -4,6 +4,9 @@ import lombok.SneakyThrows;
 import ru.drondrin.entity.FileInfo;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -87,6 +90,26 @@ public class FileInfoRepository extends Repository {
     @SneakyThrows
     public void deleteById(String id) {
         String sql = "DELETE FROM " + getTableName() + " WHERE id = ?";
+        var statement = connection.prepareStatement(sql);
+        statement.setString(1, id);
+        statement.executeUpdate();
+        connection.commit();
+    }
+
+    @SneakyThrows
+    public List<String> getOldFiles(long millisecondsAgo) {
+        String sql = "SELECT id FROM " + getTableName() + " WHERE lastDownload < " +
+                "DATEADD('MILLISECOND', -%d, CURRENT_TIMESTAMP) LIMIT 1000".formatted(millisecondsAgo);
+        ResultSet resultSet = connection.createStatement().executeQuery(sql);
+        List<String> ids = new ArrayList<>();
+        while (resultSet.next())
+            ids.add(resultSet.getString("id"));
+        return ids;
+    }
+
+    @SneakyThrows
+    public void updateLastDownload(String id) {
+        String sql = "UPDATE " + getTableName() + " SET lastDownload = CURRENT_TIMESTAMP WHERE id = ?";
         var statement = connection.prepareStatement(sql);
         statement.setString(1, id);
         statement.executeUpdate();

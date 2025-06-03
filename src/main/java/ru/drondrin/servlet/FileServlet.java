@@ -32,7 +32,7 @@ public class FileServlet extends HttpServlet {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
-        Optional<FileReadDto> dtoOptional = fileService.getFile(id);
+        Optional<FileReadDto> dtoOptional = fileService.getFileAndUpdateLastDownload(id);
         if (dtoOptional.isPresent()) {
             var fileReadDto = dtoOptional.get();
             resp.setContentType("multipart/form-data");
