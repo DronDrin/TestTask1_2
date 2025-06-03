@@ -1,11 +1,13 @@
 package ru.drondrin.service;
 
 import jakarta.servlet.http.Part;
+import ru.drondrin.dto.FileReadDto;
 import ru.drondrin.entity.FileInfo;
 import ru.drondrin.repository.FileInfoRepository;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 public class FileService {
     private final File bucket;
@@ -29,5 +31,10 @@ public class FileService {
         file.write(filePath);
 
         return id;
+    }
+
+    public Optional<FileReadDto> getFile(String id) {
+        return fileInfoRepository.findById(id).map(fi -> new FileReadDto(fi.getName(),
+                        new File(bucket.getAbsolutePath() + File.separator + id)));
     }
 }
