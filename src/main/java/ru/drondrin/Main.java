@@ -1,17 +1,18 @@
 package ru.drondrin;
 
-import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.startup.Tomcat;
 
 import java.io.File;
 
 public class Main {
+    public static final ConfigReader CONFIG = new ConfigReader("src/main/resources/config.properties");
+
     public static void main(String[] args) {
         var tomcat = new Tomcat();
-        tomcat.setPort(8095);
-        tomcat.getConnector().setPort(8095);
-        Context context = tomcat.addWebapp("", new File("src/main/resources/").getAbsolutePath());
+        tomcat.setPort(CONFIG.intProperty("server.port"));
+        tomcat.getConnector().setPort(CONFIG.intProperty("server.port"));
+        tomcat.addWebapp("", new File("src/main/resources/").getAbsolutePath());
 
         try {
             tomcat.init();
