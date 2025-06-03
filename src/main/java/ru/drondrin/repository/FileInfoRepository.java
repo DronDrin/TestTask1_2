@@ -50,7 +50,7 @@ public class FileInfoRepository extends Repository {
         var statement = connection.prepareStatement(sql);
         statement.setString(1, id);
         var result = statement.executeQuery();
-        var cnt = result.getInt("cnt");
+        var cnt = result.next() ? result.getInt("cnt") : 0;
         return cnt > 0;
     }
 
