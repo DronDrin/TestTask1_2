@@ -11,7 +11,7 @@ public class Main {
         var tomcat = new Tomcat();
         tomcat.setPort(8095);
         tomcat.getConnector().setPort(8095);
-        Context context = tomcat.addWebapp("", new File(".").getAbsolutePath());
+        Context context = tomcat.addWebapp("", new File("src/main/resources/").getAbsolutePath());
 
         try {
             tomcat.init();
