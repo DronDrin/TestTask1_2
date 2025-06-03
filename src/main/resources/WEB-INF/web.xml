@@ -24,7 +24,7 @@
         <servlet-name>FileServlet</servlet-name>
         <servlet-class>ru.drondrin.servlet.FileServlet</servlet-class>
         <multipart-config>
-            <max-file-size>52428800</max-file-size>
+<!--            <max-file-size>52428800</max-file-size>-->
         </multipart-config>
     </servlet>
 
