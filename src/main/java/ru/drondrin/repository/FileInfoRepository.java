@@ -78,7 +78,7 @@ public class FileInfoRepository extends Repository {
         var id = generateId();
         statement.setString(1, id);
         statement.setString(2, name);
-        connection.prepareStatement(sql).executeUpdate();
+        statement.executeUpdate();
         connection.commit();
         var fileInfo = findById(id);
         return fileInfo.orElseThrow(() -> new RuntimeException("Just saved file wasn't found"));
