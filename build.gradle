@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+group = 'ru.drondrin'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    compileOnly 'jakarta.servlet:jakarta.servlet-api:6.1.0'
+    compileOnly 'jakarta.servlet.jsp:jakarta.servlet.jsp-api:4.0.0'
+
+    implementation 'org.apache.tomcat.embed:tomcat-embed-core:11.0.7'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:11.0.7'
+    implementation 'org.apache.tomcat:tomcat-servlet-api:11.0.7'
+}
+
+test {
+    useJUnitPlatform()
+}
