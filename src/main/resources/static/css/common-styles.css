@@ -2,35 +2,35 @@
     font-family: 'edu';
     font-style: normal;
     font-weight: 400;
-    src: url("../fonts/EduSAHand/regular.ttf") format("truetype");
+    src: url("/static/fonts/EduSAHand/regular.ttf") format("truetype");
 }
 
 @font-face {
     font-family: 'edu';
     font-style: normal;
     font-weight: 500;
-    src: url("../fonts/EduSAHand/medium.ttf") format("truetype");
+    src: url("/static/fonts/EduSAHand/medium.ttf") format("truetype");
 }
 
 @font-face {
     font-family: 'edu';
     font-style: normal;
     font-weight: 600;
-    src: url("../fonts/EduSAHand/semibold.ttf") format("truetype");
+    src: url("/static/fonts/EduSAHand/semibold.ttf") format("truetype");
 }
 
 @font-face {
     font-family: 'edu';
     font-style: normal;
     font-weight: 700;
-    src: url("../fonts/EduSAHand/bold.ttf") format("truetype");
+    src: url("/static/fonts/EduSAHand/bold.ttf") format("truetype");
 }
 
 @font-face {
     font-family: 'inco';
     font-style: normal;
     font-weight: 400;
-    src: url("../fonts/Inconsolata/regular.ttf") format("truetype");
+    src: url("/static/fonts/Inconsolata/regular.ttf") format("truetype");
 }
 
 :root {

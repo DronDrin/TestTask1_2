@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Download file</title>
-    <style><%@include file="css/common-styles.css"%></style>
-    <style><%@include file="css/download-styles.css"%></style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/download-styles.css">
 </head>
 <body>
 <main class="main">

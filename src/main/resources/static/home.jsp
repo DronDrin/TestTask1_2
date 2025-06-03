@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>First JSP App</title>
-    <script><%@include file="js/home-scripts.js"%></script>
+    <script src="${pageContext.request.contextPath}/static/js/home-scripts.js"></script>
 </head>
 <body>
 <input type="file" id="userFile">

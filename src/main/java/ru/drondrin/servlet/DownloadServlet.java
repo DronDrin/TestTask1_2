@@ -17,7 +17,7 @@ public class DownloadServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String removed = req.getParameter("removed");
         if (Objects.equals(removed, "true")) {
-            getServletContext().getRequestDispatcher("/downloadRemoved.jsp").forward(req, resp);
+            getServletContext().getRequestDispatcher("/static/downloadRemoved.jsp").forward(req, resp);
             return;
         }
 
@@ -27,9 +27,9 @@ public class DownloadServlet extends HttpServlet {
         else {
             Optional<FileReadDto> fileOptional = fileService.getFileAndUpdateLastDownload(id);
             if (fileOptional.isPresent())
-                getServletContext().getRequestDispatcher("/download.jsp").forward(req, resp);
+                getServletContext().getRequestDispatcher("/static/download.jsp").forward(req, resp);
             else
-                getServletContext().getRequestDispatcher("/downloadNotFound.jsp").forward(req, resp);
+                getServletContext().getRequestDispatcher("/static/downloadNotFound.jsp").forward(req, resp);
         }
     }
 }
