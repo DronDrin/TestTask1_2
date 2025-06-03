@@ -43,3 +43,6 @@ bin/
 
 ## tomcat run
 tomcat.8095
+
+## local db
+TestTask1_2_database.mv.db
