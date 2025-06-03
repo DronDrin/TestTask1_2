@@ -32,4 +32,15 @@
         <servlet-name>FileServlet</servlet-name>
         <url-pattern>/api/v1/file/</url-pattern>
     </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>FileRemoveServlet</servlet-name>
+        <servlet-class>ru.drondrin.servlet.FileRemoveServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>FileRemoveServlet</servlet-name>
+        <url-pattern>/api/v1/file/remove/</url-pattern>
+    </servlet-mapping>
 </web-app>

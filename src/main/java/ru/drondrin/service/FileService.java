@@ -24,7 +24,7 @@ public class FileService {
     public String saveFile(Part file) throws IOException {
         FileInfo fileInfo = fileInfoRepository.save(file.getSubmittedFileName());
         String id = fileInfo.getId();
-        String filePath = bucket.getAbsolutePath() + File.separator + id;
+        String filePath = getFilePath(id);
 
         bucket.mkdirs();
         new File(filePath).createNewFile();
@@ -35,6 +35,17 @@ public class FileService {
 
     public Optional<FileReadDto> getFile(String id) {
         return fileInfoRepository.findById(id).map(fi -> new FileReadDto(fi.getName(),
-                        new File(bucket.getAbsolutePath() + File.separator + id)));
+                        new File(getFilePath(id))));
+    }
+
+    private String getFilePath(String id) {
+        return bucket.getAbsolutePath() + File.separator + id;
+    }
+
+    public void deleteFile(String id) {
+        fileInfoRepository.findById(id).ifPresent(fi -> {
+            new File(getFilePath(id)).delete();
+            fileInfoRepository.deleteById(id);
+        });
     }
 }

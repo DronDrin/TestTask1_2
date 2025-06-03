@@ -83,4 +83,13 @@ public class FileInfoRepository extends Repository {
         var fileInfo = findById(id);
         return fileInfo.orElseThrow(() -> new RuntimeException("Just saved file wasn't found"));
     }
+
+    @SneakyThrows
+    public void deleteById(String id) {
+        String sql = "DELETE FROM " + getTableName() + " WHERE id = ?";
+        var statement = connection.prepareStatement(sql);
+        statement.setString(1, id);
+        statement.executeUpdate();
+        connection.commit();
+    }
 }
