@@ -21,11 +21,15 @@ window.addEventListener('load', () => {
     userFileEl.addEventListener('change', () => {
         if (getStage() > 1)
             return;
+        const textEl = uploadArea.querySelector('.upload-form__file-area__text');
         if (userFileEl.files.length > 0) {
-            uploadArea.innerText = userFileEl.files[0].name;
-            nextStage();
+            let fileName = userFileEl.files[0].name;
+            if (fileName.length > 60)
+                fileName = fileName.substring(0, 60);
+            textEl.innerText = fileName;
+            setStage(1);
         } else {
-            uploadArea.innerText = 'Click to choose file, or drop it here';
+            textEl.innerText = 'Click to choose file, or drop it here';
         }
     });
 
@@ -48,7 +52,7 @@ window.addEventListener('load', () => {
             });
             request.addEventListener('load', () => {
                 fileLinkEl.innerText = window.location.origin + '/download/?id=' + request.responseText;
-                nextStage();
+                setStage(3);
             });
             const data = new FormData();
             data.set("userFile", file);
@@ -58,18 +62,9 @@ window.addEventListener('load', () => {
 
     uploadAnotherButton.addEventListener('click', () => {
         if (getStage() === 3)
-            resetStage();
+            setStage(0);
     });
 });
-
-function nextStage() {
-    if (_stage < 3)
-        setStage(_stage + 1);
-}
-
-function resetStage() {
-    setStage(0);
-}
 
 function setStage(newStage) {
     _stage = newStage;

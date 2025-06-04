@@ -52,7 +52,11 @@ public class FileService implements Closeable {
      * @return id of the saved file
      */
     public String saveFile(Part file) throws IOException {
-        FileInfo fileInfo = fileInfoRepository.save(file.getSubmittedFileName());
+        String fileName = file.getSubmittedFileName();
+        if (fileName.length() > 60)
+            fileName = fileName.substring(0, 60);
+
+        FileInfo fileInfo = fileInfoRepository.save(fileName);
         String id = fileInfo.getId();
         String filePath = getFilePath(id);
 
