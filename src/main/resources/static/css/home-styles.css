@@ -1,0 +1,138 @@
+@import "common-styles.css";
+
+.main {
+    width: 100%;
+    height: 100vw;
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.upload-form {
+    background-color: var(--c1);
+    padding: 40px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload-form__header {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.upload-form__file-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid var(--c5);
+    border-radius: 10px;
+    margin-bottom: 30px;
+    user-select: none;
+    cursor: pointer;
+    width: 100%;
+    flex: 1 1 auto;
+    font-size: 30px;
+    background-color: var(--c3);
+}
+
+.upload-form__file-area__text {
+    max-width: 100%;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+}
+
+.upload-form:not(.upload-form_file-chosen) .upload-form__upload-button {
+    filter: grayscale(100%);
+    pointer-events: none;
+    transform: scale(0.9);
+}
+
+
+.progress-bar {
+    width: 100%;
+}
+
+.progress-bar__wrapper {
+    display: flex;
+    gap: 20px;
+}
+
+.progress-bar__body {
+    flex: 1 1 50px;
+    border: 3px solid var(--c3);
+    overflow: hidden;
+    border-radius: 600px;
+    position: relative;
+    height: 36px;
+}
+
+.progress-bar__indicator {
+    background-color: var(--c5);
+    height: 30px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.progress-bar_unset .progress-bar__indicator {
+    animation: progress-bar-unset 2s linear infinite;
+    width: 40%;
+}
+
+@keyframes progress-bar-unset {
+    0% {
+        left: -40%;
+    }
+    100% {
+        left: 140%;
+    }
+}
+
+.upload-form_uploading .upload-form__file-area {
+    filter: grayscale(100%);
+    pointer-events: none;
+}
+
+.upload-form:not(.upload-form_uploading) .upload-form__progress-bar {
+    display: none;
+}
+
+.upload-form_uploading .upload-form__upload-button,
+.upload-form_finish .upload-form__upload-button {
+    display: none;
+}
+
+.upload-form:not(.upload-form_finish) .upload-form__finish {
+    display: none;
+}
+
+.upload-form__link-description {
+    font-size: 20px;
+}
+
+.upload-form__link {
+    font-size: 22px;
+}
+
+.upload-form__finish {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.upload-form_finish .upload-form__header,
+.upload-form_finish .upload-form__file-area {
+    display: none;
+}
