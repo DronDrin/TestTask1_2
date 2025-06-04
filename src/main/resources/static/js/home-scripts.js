@@ -1,10 +1,12 @@
 let uploadButton, uploadArea, progressBar, progressBarIndicator, progressBarText, userFileEl, uploadForm,
     uploadAnotherButton, fileLinkEl;
 let _stage = 0;
+let file, fileName;
 
 function setFile(_file) {
     const textEl = uploadArea.querySelector('.upload-form__file-area__text');
-    let fileName = _file.name;
+    file = _file;
+    fileName = _file.name;
     if (fileName.length > 60)
         fileName = fileName.substring(0, 60);
     textEl.innerText = fileName;
@@ -43,13 +45,13 @@ window.addEventListener('load', () => {
             setFile(userFileEl.files[0]);
         } else {
             textEl.innerText = 'Click to choose file, or drop it here';
+            setStage(0);
         }
     });
 
     uploadButton.addEventListener('click', () => {
         if (getStage() === 1) {
             setStage(2);
-            const file = userFileEl.files[0];
             const request = new XMLHttpRequest();
             request.open("post", "/api/v1/file/");
             request.upload.addEventListener('progress', e => {

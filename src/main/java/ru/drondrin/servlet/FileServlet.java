@@ -18,6 +18,10 @@ public class FileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Part userFile = req.getPart("userFile");
+        if (userFile.getSubmittedFileName() == null) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
         String fileId = fileService.saveFile(userFile);
         req.setAttribute("fileId", fileId);
         var writer = resp.getWriter();
