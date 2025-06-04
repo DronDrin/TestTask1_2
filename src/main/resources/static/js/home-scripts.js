@@ -2,6 +2,15 @@ let uploadButton, uploadArea, progressBar, progressBarIndicator, progressBarText
     uploadAnotherButton, fileLinkEl;
 let _stage = 0;
 
+function setFile(_file) {
+    const textEl = uploadArea.querySelector('.upload-form__file-area__text');
+    let fileName = _file.name;
+    if (fileName.length > 60)
+        fileName = fileName.substring(0, 60);
+    textEl.innerText = fileName;
+    setStage(1);
+}
+
 window.addEventListener('load', () => {
     uploadButton = document.getElementById("uploadButton");
     uploadArea = document.getElementById("uploadArea");
@@ -18,16 +27,20 @@ window.addEventListener('load', () => {
             userFileEl.click();
     });
 
+    uploadArea.addEventListener('drop', e => {
+        if (e.dataTransfer.files.length > 0)
+            setFile(e.dataTransfer.files[0]);
+        e.preventDefault();
+    });
+
+    uploadArea.addEventListener('dragover', e => e.preventDefault());
+
     userFileEl.addEventListener('change', () => {
         if (getStage() > 1)
             return;
         const textEl = uploadArea.querySelector('.upload-form__file-area__text');
         if (userFileEl.files.length > 0) {
-            let fileName = userFileEl.files[0].name;
-            if (fileName.length > 60)
-                fileName = fileName.substring(0, 60);
-            textEl.innerText = fileName;
-            setStage(1);
+            setFile(userFileEl.files[0]);
         } else {
             textEl.innerText = 'Click to choose file, or drop it here';
         }

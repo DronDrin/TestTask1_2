@@ -49,6 +49,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     text-wrap: nowrap;
+    pointer-events: none;
 }
 
 .upload-form:not(.upload-form_file-chosen) .upload-form__upload-button {
