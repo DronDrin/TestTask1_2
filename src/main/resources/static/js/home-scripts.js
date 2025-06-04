@@ -75,6 +75,17 @@ window.addEventListener('load', () => {
         }
     });
 
+    const selectLink = () => {
+        const selection = window.getSelection();
+        const range = document.createRange();
+        range.selectNodeContents(fileLinkEl);
+        selection.removeAllRanges();
+        selection.addRange(range);
+    };
+    fileLinkEl.addEventListener('mousedown', selectLink);
+    fileLinkEl.addEventListener('mouseup', selectLink);
+    fileLinkEl.addEventListener('click', selectLink);
+
     uploadAnotherButton.addEventListener('click', () => {
         if (getStage() === 3)
             setStage(0);
