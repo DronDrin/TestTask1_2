@@ -46,6 +46,7 @@
 
 .upload-form__file-area__text {
     max-width: 100%;
+    overflow: hidden;
     text-overflow: ellipsis;
     text-wrap: nowrap;
 }
