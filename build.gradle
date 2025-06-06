@@ -1,20 +1,6 @@
 plugins {
     id 'java'
     id("io.freefair.lombok") version "8.13.1"
-    id 'application'
-}
-
-apply plugin: 'java'
-ext {
-    javaMainClass = 'ru.drondrin.Main'
-}
-
-application {
-    mainClassName = javaMainClass
-}
-
-run {
-    standardInput = System.in
 }
 
 jar {
