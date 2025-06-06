@@ -10,8 +10,11 @@ import ru.drondrin.dto.FileReadDto;
 import ru.drondrin.entity.FileInfo;
 
 import java.io.*;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static ru.drondrin.Main.fileService;
 
 public class FileServlet extends HttpServlet {
@@ -40,7 +43,8 @@ public class FileServlet extends HttpServlet {
         if (dtoOptional.isPresent()) {
             var fileReadDto = dtoOptional.get();
             resp.setContentType("multipart/form-data");
-            resp.setHeader("Content-Disposition", "attachment; filename=" + fileReadDto.fileName());
+            resp.setHeader("Content-Disposition", "attachment; filename*=utf-8''" +
+                    URLEncoder.encode(fileReadDto.fileName(), UTF_8).replace('+', ' '));
 
             ServletOutputStream out = resp.getOutputStream();
             File file = fileReadDto.file();
